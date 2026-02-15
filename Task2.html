@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Task 2 </title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+  font-family: Arial;
+  margin:0;
+  background:#f4f4f4;
+}
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#333;
+  color:white;
+  padding:15px;
+}
+.navbar a{
+  color:white;
+  text-decoration:none;
+  margin-left:20px;
+}
+.container{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  padding:20px;
+}
+.card{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+h2{text-align:center}
+input,textarea{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+}
+button{
+  padding:10px;
+  border:none;
+  background:#333;
+  color:white;
+  cursor:pointer;
+  width:100%;
+}
+ul{
+  list-style:none;
+  padding:0;
+}
+li{
+  background:#eee;
+  margin:8px 0;
+  padding:10px;
+  display:flex;
+  justify-content:space-between;
+}
+.del{
+  background:red;
+  color:white;
+  border:none;
+  padding:5px 10px;
+}
+@media(max-width:768px){
+  .container{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+<body>
+<div class="navbar">
+  <h3>Task 2😎</h3>
+  <div>
+    <a href="#">Home</a>
+    <a href="#">Contact</a>
+  </div>
+</div>
+<div class="container">
+<div class="card">
+<h2>Contact Form</h2>
+<form onsubmit="return validateForm()">
+<input type="text" id="name" placeholder="Enter Name">
+<input type="email" id="email" placeholder="Enter Email">
+<textarea id="msg" placeholder="Enter Message"></textarea>
+<button type="submit">Submit</button>
+</form>
+<p id="error"></p>
+</div>
+<div class="card">
+<h2>To-Do List</h2>
+<input type="text" id="task" placeholder="Enter task">
+<button onclick="addTask()">Add Task</button>
+<ul id="list"></ul>
+</div>
+</div>
+<script>
+function validateForm(){
+ let name=document.getElementById("name").value;
+ let email=document.getElementById("email").value;
+ let msg=document.getElementById("msg").value;
+ let err=document.getElementById("error");
+ if(name=="" || email=="" || msg==""){
+   err.innerHTML="Please fill all fields";
+   err.style.color="red";
+   return false;
+ }
+ if(!email.includes("@")){
+   err.innerHTML="Enter valid email";
+   err.style.color="red";
+   return false;
+ }
+ err.innerHTML="Form submitted successfully!";
+ err.style.color="green";
+ return false;
+}
+function addTask(){
+ let task=document.getElementById("task").value;
+ if(task==""){
+   alert("Enter a task");
+   return;
+ }
+ let li=document.createElement("li");
+ li.innerHTML=task + ' <button class="del" onclick="this.parentElement.remove()">Delete</button>';
+ document.getElementById("list").appendChild(li);
+ document.getElementById("task").value="";
+}
+</script>
+</body>
+</html>
